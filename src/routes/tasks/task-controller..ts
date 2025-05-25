@@ -7,7 +7,7 @@ import { ApiTags } from "@nestjs/swagger";
 
 
 @ApiTags('List')
-@Controller('list')
+@Controller('task')
 export class ListController {
 
     constructor(
@@ -15,14 +15,14 @@ export class ListController {
         private readonly createTaskService: CreateTaskService
     ) {}
 
-    @Get()
+    @Get('listar')
     async getList() {
         return this.listService.getList();
     }
 
     @Post()
-    async createTask(@Body() task: CreateTaskDTO) {
-        return this.createTaskService.createTask(task);
+    async createTask(@Body() task: CreateTaskDTO, @Query() params: ParamsTaskDTO) {
+        return this.createTaskService.createTask(task, params);
 
     }
 }

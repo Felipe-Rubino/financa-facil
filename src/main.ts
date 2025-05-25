@@ -35,6 +35,7 @@ function createSwaggerConfig() {
     .setDescription('Documentação da API')
     .setVersion('1.0')
     .addTag('List')
+    .addTag('User')
     .build();
 }
 

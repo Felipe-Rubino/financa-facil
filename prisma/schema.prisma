@@ -27,11 +27,11 @@ model Profile {
 
 model Users {
   CODUSU Int @id @default(autoincrement())
-  USUARIO String
   PASSWORD String
+  LOGIN String @unique
   NOME String
   EMAIL String
-  CELULAR String
+  CELULAR String?
   DATAINC DateTime? @default(now())
   DATAALT DateTime?
   USUINC Int?
@@ -47,7 +47,7 @@ model Tasks {
   TAREFA String
   DESCRICAO String
   DATAINC DateTime? @default(now())
-  DATAALT DateTime?
+  DATAALT DateTime? @default(now())
   USUINC Int?
   USUALT Int?
   STATUS String
