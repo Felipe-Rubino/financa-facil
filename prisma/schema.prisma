@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Profile {
+  CODPROF Int @id @default(autoincrement())
+  PERFIL String 
+  USUINC Int?
+  USUALT Int?
+  DATAINC DateTime? @default(now())
+  USUARIOS Users[]
+
+  @@map("PROFILE")
+}
+
+model Users {
+  CODUSU Int @id @default(autoincrement())
+  USUARIO String
+  PASSWORD String
+  NOME String
+  EMAIL String
+  CELULAR String
+  DATAINC DateTime? @default(now())
+  DATAALT DateTime?
+  USUINC Int?
+  USUALT Int?
+  PERFIL Profile? @relation(fields: [CODPROF], references: [CODPROF])
+  CODPROF Int?
+  TASKS Tasks[]
+  @@map("USERS")
+}
+
+model Tasks {
+  CODTAREFA Int @id @default(autoincrement())
+  TAREFA String
+  DESCRICAO String
+  DATAINC DateTime? @default(now())
+  DATAALT DateTime?
+  USUINC Int?
+  USUALT Int?
+  STATUS String
+  CODUSU Int?
+  IMAGEM TaskImage[]
+  USUARIO Users? @relation(fields: [CODUSU], references: [CODUSU]) 
+
+
+  @@map("TASKS")
+}
+
+model TaskImage {
+  id         Int     @id @default(autoincrement())
+  imageUrl   String
+  CODTAREFA  Int
+  TASKS      Tasks   @relation(fields: [CODTAREFA], references: [CODTAREFA])
+
+  @@map("TASK_IMAGE")
+}
+
