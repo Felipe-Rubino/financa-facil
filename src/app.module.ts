@@ -12,10 +12,13 @@ import { UserService } from './routes/users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { AuthService } from './routes/users/cases/user-login.service';
 import { HashTools } from './tools/hash.tool';
+import ProfileModule from './routes/profile/profile.module';
+import { ProfilerController } from './routes/profile/profile.controller';
+import { ProfileService } from './routes/profile/cases/create-profile.service';
 
 @Module({
-  imports: [PrismaModule, TaskModule, UserModule],
-  controllers: [ListController, UserController],
-  providers: [CreateTaskService, ListService, UserService, JwtService, AuthService, HashTools],
+  imports: [PrismaModule, TaskModule, UserModule, ProfileModule],
+  controllers: [ListController, UserController, ProfilerController],
+  providers: [CreateTaskService, ListService, UserService, JwtService, AuthService, HashTools, ProfileService],
 })
 export class AppModule {}

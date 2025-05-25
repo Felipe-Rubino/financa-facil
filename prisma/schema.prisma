@@ -16,7 +16,7 @@ datasource db {
 
 model Profile {
   CODPROF Int @id @default(autoincrement())
-  PERFIL String 
+  PERFIL String? @unique
   USUINC Int?
   USUALT Int?
   DATAINC DateTime? @default(now())
