@@ -3,7 +3,7 @@ import { ListService } from "./cases/list.service";
 import { CreateTaskService } from "./cases/create-task.service";
 import { ParamsTaskDTO } from "./dto/params-task.dto";
 import { CreateTaskDTO } from "./dto/create-task.dto";
-import { ApiTags } from "@nestjs/swagger";
+import { ApiBody, ApiConsumes, ApiTags } from "@nestjs/swagger";
 
 
 @ApiTags('List')
@@ -21,8 +21,9 @@ export class ListController {
     }
 
     @Post()
+    @ApiConsumes('multipart/form-data', 'application/json')
+    @ApiBody({ type: CreateTaskDTO })
     async createTask(@Body() task: CreateTaskDTO, @Query() params: ParamsTaskDTO) {
         return this.createTaskService.createTask(task, params);
-
     }
 }

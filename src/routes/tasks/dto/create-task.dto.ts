@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString } from "class-validator";
+import { IsBase64, IsString } from "class-validator";
 
 
 export class CreateTaskDTO {
@@ -22,5 +22,9 @@ export class CreateTaskDTO {
     @IsString()
     STATUS: 'ANDAMENTO' | 'FINALIZADO' | 'CANCELADO' | 'PENDENTE';
 
+    @ApiProperty({
+        required: true,
+    })
+    @IsBase64()
     IMAGEM: string;
 }
